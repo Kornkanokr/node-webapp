@@ -4,11 +4,19 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>First Page</title>
+<title>first Page</title>
 </head>
 <body>
-    <!--put here-->
-    <h1>Hello, Hoola</h1>
-    <!---->
+
+    <form name="submit" method="post" action="/data">
+        student_id ::<input type="text" size="20" name="student_id"> <p>
+        firstname ::<input  type="text" size="20" name="firstname">
+        lastname ::<input  type="text" size="20" name="lastname"> <p>
+        gender ::   <input type="radio" value="Male" name="gender" checked/ > Male
+                    <input type="radio" value="Female" name="gender" checked/ > Female <p>
+
+        <input type="submit" value="submit" />
+    </form>
+
 </body>
 </html>
