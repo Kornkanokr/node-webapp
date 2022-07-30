@@ -25,34 +25,22 @@
         <input type="submit" value="submit" />
                     -->
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1">1-แบบฟอร์มลงทะเบียน</a></li>
-        <li><a href="#tabs-2">2-รายชื่อนิสิต(ALL)</a></li>
-        <li><a href="#tabs-3">3-ข้อมูลนิสิต</a></li>
-    </ul>
-    <div id="tabs-1">  
+    <!--<div class="box">
+        <h1 font-size: 60px;>Form Hello</h1>
+    </div>-->  
     
-        <form id="my-form">
-            <input type="text" id="txtStudentID" name="txtStudentID" placeholder="รหัสนิสิต" />
-            <br/>
-            <input type="text" id="txtName" name="txtName" placeholder="ชื่อ-นามสกุล" />
-            <br/>
-            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" />
-            <br/>
-            <input type="password" id="txtPassword" name="txtPassword" placeholder="รหัสผ่าน" />
-            <br/>
-            <input type="button" id="btnSubmit" value="Submit"/>
-        </form>
-    </div>
-    <div id="tabs-2">
-        <button class="ui-button ui-widget ui-corner-all" id="btnRequest">Load</button>
-        <div id="myDynamicTable"></div>
-    </div>
-    <div id="tabs-3">
-                        
-    </div>
-</div><!-- tabs-->  
+    <form id="my-form">
+        <input type="text" id="txtStudentID" name="txtStudentID" placeholder="รหัสนิสิต" />
+        <br/>
+        <input type="text" id="txtName" name="txtName" placeholder="ชื่อ-นามสกุล" />
+        <br/>
+        <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" />
+        <br/>
+        <input type="password" id="txtPassword" name="txtPassword" placeholder="รหัสผ่าน" />
+        <br/>
+        <input type="button" id="btnSubmit" value="Submit"/>
+    </form>
+ 
 <script type="text/javascript">
     $(document).ready(function () {
        console.log("Onload");
