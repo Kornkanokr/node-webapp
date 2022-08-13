@@ -8,39 +8,58 @@
 <!--CSS-->
 <link rel="stylesheet" href="/jquery-ui/themes/base/jquery-ui.css">
 
+<!--Tailwind CSS-->
+<link rel="stylesheet" href="/styles/style.css"/>
+
 <!--Javascript-->
 <script src="/jquery/jquery.min.js"></script>
 <script src="/jquery-ui/jquery-ui.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
-    <!--
-    <form name="submit" method="post" action="/data">
-        student_id ::<input type="text" size="20" name="student_id"> <p>
-        firstname ::<input  type="text" size="20" name="firstname">
-        lastname ::<input  type="text" size="20" name="lastname"> <p>
-        gender ::   <input type="radio" value="Male" name="gender" checked/ > Male
-                    <input type="radio" value="Female" name="gender" checked/ > Female <p>
+  <div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">1-แบบฟอร์มลงทะเบียน</a></li>
+        <li><a href="#tabs-2">2-รายชื่อนิสิต(ALL)</a></li>
+        <li><a href="#tabs-3">3-ข้อมูลนิสิต</a></li>
+    </ul>
+    <div id="tabs-1">  
 
-        <input type="submit" value="submit" />
-                    -->
+        <form id="my-form">
+            <input type="text" id="txtStudentID" name="txtStudentID" placeholder="รหัสนิสิต" />
+            <br/>
+            <input type="text" id="txtName" name="txtName" placeholder="ชื่อ-นามสกุล" />
+            <br/>
+            <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" />
+            <br/>
+            <input type="password" id="txtPassword" name="txtPassword" placeholder="รหัสผ่าน" />
+            <br/>
+            <input type="button" id="btnSubmit" value="Submit"/>
+        </form>
+    </div>
+    <div id="tabs-2">
+        <button class="ui-button ui-widget ui-corner-all" id="btnRequest">Load</button>
+        <div id="myDynamicTable"></div>
+    </div>
+    <div id="tabs-3">
+      <div class="flex justify-center">
+        <div class="rounded-lg shadow-lg bg-white max-w-sm">
+          <a href="#!">
+            <img class="rounded-t-lg" src="/images/Cat2.png" alt=""/>
+          </a>
+          <div class="p-6">
+            <div class="p-6">
+              <h5 class="text-gray-900 text-xl font-medium mb-2" id="data-name" style="text-align: center ;">Name: </h5>
+              <h5 class="text-gray-900 text-xl font-medium mb-2" id="data-studentID" style="text-align: center;">Student ID: </h5>
+              <h5 class="text-gray-900 text-xl font-medium mb-2" id="data-gpa" style="text-align: center;">GPA: </h5>
+              <h5 class="text-gray-900 text-xl font-medium mb-2" id="data-position" style="text-align: center;">Position: </h5>
+          </div>
+        </div>
+      </div>
 
-    <!--<div class="box">
-        <h1 font-size: 60px;>Form Hello</h1>
-    </div>-->  
-    
-    <form id="my-form">
-        <input type="text" id="txtStudentID" name="txtStudentID" placeholder="รหัสนิสิต" />
-        <br/>
-        <input type="text" id="txtName" name="txtName" placeholder="ชื่อ-นามสกุล" />
-        <br/>
-        <input type="text" id="txtEmail" name="txtEmail" placeholder="Email" />
-        <br/>
-        <input type="password" id="txtPassword" name="txtPassword" placeholder="รหัสผ่าน" />
-        <br/>
-        <input type="button" id="btnSubmit" value="Submit"/>
-    </form>
- 
+    </div>
+</div><!-- tabs-->  
 <script type="text/javascript">
     $(document).ready(function () {
        console.log("Onload");
@@ -69,7 +88,7 @@
            headers: { 
              'Content-Type': 'application/json',
              "Accepts": "application/json",
-             "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjU4ODU1MTExLCJleHAiOjE2NTg4NTg3MTEsIm5iZiI6MTY1ODg1NTExMSwianRpIjoiOHoxYnZ6c0lZMTBKVWEyTCIsInN1YiI6NjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Qyrn6y4S_3_ESlJvv0Yv0UNj52Q806axPtNv52jJBxQ",
+             "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjYwNDA0NTA5LCJleHAiOjE2NjA0MDgxMDksIm5iZiI6MTY2MDQwNDUwOSwianRpIjoidTN4VGNta1pNNDFDenp4SiIsInN1YiI6NjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ojYTfKVgsexR13mqNbhDfmA-b9x0lAfx9hNCtFISOL0",
            },
            success: function(data){
              console.log(data);
@@ -94,7 +113,7 @@
             data:JSON.stringify( { "name": $('#txtName').val(), "student_id": $('#txtStudentID').val(), "email": $('#txtEmail').val(), "password": $('#txtPassword').val() } ),
             success: function(data){
               console.log(data);
-             
+
             }
           });
 
@@ -227,7 +246,7 @@
           //elementButtonSave.setAttribute("class","tealA400");
           
          
-          elementButtonSave.setAttribute("onclick","popupConfirm('"+items[i].fullname+"',this)");
+          elementButtonSave.setAttribute("onclick","confirmAlert('"+items[i].student_id+"',this)");
           
   
           cell5.appendChild(elementButtonSave);
@@ -240,9 +259,45 @@
       }
       myTableDiv.appendChild(table);
     }
-  
-    function popupConfirm(fullname,objElement){
-      alert(fullname);
+    
+    
+    function confirmAlert(id){
+      //console.log(id);
+      swal({
+        title: "Are you sure?",
+        text: "ต้องการดูข้อมูลนิสิตใช่หรือไม่?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          $("#tabs").tabs("option","active",2);
+          swal("You pressed OK!", {
+            icon: "success",
+          });
+        } else {
+          swal("You pressed Cancel!");
+        }
+      });
+    
+          $.ajax({
+            method: "GET",
+            url: "https://tools.ecpe.nu.ac.th/network/api/students",
+            dataType : 'json',
+            headers: { 
+              'Content-Type': 'application/json',
+              "Accepts": "application/json",
+              "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90b29scy5lY3BlLm51LmFjLnRoXC9uZXR3b3JrXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjYwNDA0NTA5LCJleHAiOjE2NjA0MDgxMDksIm5iZiI6MTY2MDQwNDUwOSwianRpIjoidTN4VGNta1pNNDFDenp4SiIsInN1YiI6NjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ojYTfKVgsexR13mqNbhDfmA-b9x0lAfx9hNCtFISOL0`
+            },
+            success: function(data){
+              console.log(data);
+              document.getElementById("data-name").innerHTML = "Name: "+data[0].fullname;
+              document.getElementById("data-studentID").innerHTML = "Student_id: "+data[0].student_id;
+              document.getElementById("data-gpa").innerHTML = "GPA: "+data[0].gpa;
+              document.getElementById("data-position").innerHTML = "Position: "+data[0].position;
+            }
+          });
     }
   </script>                 
 </form>
